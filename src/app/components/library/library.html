@@ -1,0 +1,13 @@
+<div class="cards">
+  @for (card of set; track card.id) {
+    <div class="card">
+      <h3>{{ card.name }}</h3>
+      <p>{{ card.id }}</p>
+        <img [src]="card.img">
+      <img 
+        [src]="card.img" 
+        [alt]="card.name"
+      >
+    </div>
+  }
+</div>
