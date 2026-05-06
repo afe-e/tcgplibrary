@@ -1,0 +1,17 @@
+<h1>Listado de todas las cartas</h1>
+<section>
+<div class="card-container">
+  @for (card of allCards; track card.id) {
+    <div class="pokemon-card">
+      <img [src]="card.image + '/low.webp'" [alt]="card.name" loading="lazy">
+      
+      <div class="info">
+        <h3>{{ card.name }}</h3>
+        <p>{{ card.id }}</p>
+      </div>
+    </div>
+  } @empty {
+    <div class="loading">Cargando la Pokédex...</div>
+  }
+</div>
+</section>

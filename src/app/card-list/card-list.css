@@ -1,0 +1,61 @@
+
+/* Contenedor principal: Rejilla flexible que se adapta al ancho de la pantalla */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f4f4f9;
+}
+
+/* Estilo de la Tarjeta Individual */
+.pokemon-card {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #e0e0e0;
+}
+
+/* Efecto al pasar el ratón: se eleva y brilla */
+.pokemon-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-color: #3b4cca; /* Azul clásico de Pokémon */
+}
+
+/* Imagen de la carta */
+.pokemon-card img {
+  width: 100%;
+  max-width: 180px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  /* Sombra interna para la imagen */
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+}
+
+/* Nombre del Pokémon */
+.pokemon-card h3 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0.5rem 0;
+  text-transform: capitalize;
+}
+
+/* ID o detalles secundarios */
+.pokemon-card p {
+  font-size: 0.85rem;
+  color: #777;
+  background: #eee;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+}
