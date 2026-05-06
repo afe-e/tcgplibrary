@@ -1,0 +1,15 @@
+<h1>{{ taskId() ? 'Editar tarea ' + taskId() : 'Crear tarea' }}</h1>
+
+<form [formGroup]="form" (ngSubmit)="createOrEdit()">
+  <div>
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" formControlName="name">
+  </div>
+  <div>
+    <label for="isDone">Estado:</label>
+    <input type="checkbox" id="isDone" formControlName="isDone">
+  </div>
+  <button type="submit" [disabled]="form.invalid">Guardar</button>
+</form>
+
+<div><a routerLink="/tasks">Volver</a></div>
