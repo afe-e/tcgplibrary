@@ -1,0 +1,14 @@
+<nav>
+  <div class="logo">Todo List Firebase</div>
+
+  <div>
+    @if (user(); as user) {
+      <a routerLink="/tasks">Tareas</a>
+      <span class="user">Hola, {{ user.name }}</span>
+      <button (click)="logout()">Cerrar sesión</button>
+    }
+  </div>
+</nav>
+<main>
+  <router-outlet></router-outlet>
+</main>

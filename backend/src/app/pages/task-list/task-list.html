@@ -1,0 +1,12 @@
+<h1>Lista de tareas</h1>
+
+<a routerLink="/create-or-edit">Crear tarea</a>
+
+@for(task of tasks(); track $index) {
+  <div>
+    <input type="checkbox" [checked]="task.isDone" disabled>
+    {{ task.name }}
+    <a [routerLink]="['/create-or-edit', task.id]">Editar</a>
+    <button (click)="deleteTask(task.id)">Eliminar</button>
+  </div>
+}
