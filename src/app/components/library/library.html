@@ -1,13 +1,47 @@
-<div class="cards">
-  @for (card of set; track card.id) {
-    <div class="card">
-      <h3>{{ card.name }}</h3>
-      <p>{{ card.id }}</p>
-        <img [src]="card.img">
-      <img 
-        [src]="card.img" 
-        [alt]="card.name"
-      >
-    </div>
-  }
-</div>
+@if (isLoading()) {
+  <div class="loading">Cargando datos...</div>
+}
+@if (!isLoading() && errorMessage()) {
+  <div class="error">{{ errorMessage() }}</div>
+}
+@if (!isLoading() && !errorMessage() && !selectedSet()) {
+  <div class="cards">
+    @for (set of sets(); track set.id) {
+      <button class="card set-card" type="button" (click)="selectSet(set)">
+        <div class="card-image">
+          @if (set.logoUrl) {
+            <img [src]="set.logoUrl" [alt]="set.name" loading="lazy">
+          }
+          @if (!set.logoUrl) {
+            <div class="no-image">Sin logo</div>
+          }
+        </div>
+        <div class="card-body">
+          <h3>{{ set.name }}</h3>
+          <p>{{ set.id }}</p>
+        </div>
+      </button>
+    }
+  </div>
+}
+@if (!isLoading() && !errorMessage() && selectedSet()) {
+  <div class="set-header">
+    <button class="back-button" type="button" (click)="selectedSet.set(null)">← Volver a expansiones</button>
+    <h2>{{ selectedSet()?.name }}</h2>
+    <p>{{ selectedSet()?.id }}</p>
+  </div>
+  <div class="cards">
+    @for (card of cards(); track card.id) {
+      <div class="card">
+        <img [src]="card.imageUrl" [alt]="card.name" loading="lazy">
+        <div class="card-body">
+          <h3>{{ card.name }}</h3>
+          <p>{{ card.id }}</p>
+        </div>
+      </div>
+    }
+  </div>
+}
+@if (!isLoading() && !errorMessage() && !selectedSet() && !sets().length) {
+  <div class="empty">No hay expansiones para mostrar.</div>
+}
