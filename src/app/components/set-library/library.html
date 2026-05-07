@@ -1,0 +1,12 @@
+<!-- library.html -->
+@if (!selectedSet()) {
+  <app-sets-library (setSelected)="selectedSet.set($event)" />
+} @else {
+  <div class="set-header">
+    <button class="back-button" type="button" (click)="selectedSet.set(null)">
+      ← Volver a expansiones
+    </button>
+    <h2>{{ selectedSet()?.title }}</h2>
+  </div>
+  <app-cards-library [setId]="selectedSet()!.id" />
+}

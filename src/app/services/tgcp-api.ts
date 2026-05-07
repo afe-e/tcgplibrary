@@ -1,64 +1,49 @@
 import { Injectable } from '@angular/core';
-import TCGdex, { Query } from '@tcgdex/sdk';
+import TCGdex from '@tcgdex/sdk';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class TgcpApi {
+  private readonly tcg = new TCGdex();
+
   async fetchSetsBySeries(seriesId = 'tcgp') {
-    try {
-      const tcg = new TCGdex();
-      console.log(`TgcpApi: obteniendo sets para la serie ${seriesId}`);
-      const series = await tcg.serie.get(seriesId);
-      const sets = series?.sets ?? [];
-      return sets.map((set: any) => ({
-        ...set,
-        logoUrl: this.buildSetLogoUrl(set),
-      }));
-    } catch (error) {
-      console.error('TgcpApi: error en fetchSetsBySeries:', error);
-      throw error;
-    }
+    console.log(`TgcpApi: fetching sets for series ${seriesId}`);
+    const series = await this.tcg.serie.get(seriesId);
+    const sets = series?.sets ?? [];
+    return sets.map((set: any) => ({
+      ...set,
+      logoUrl: this.buildSetLogoUrl(set),
+    }));
   }
 
   async fetchCardsBySet(setId: string) {
-    try {
-      const tcg = new TCGdex();
-      console.log(`TgcpApi: obteniendo cartas para el set ${setId}`);
-      const cards = await tcg.card.list(
-        Query.create()
-          .equal('set', setId)
-      );
-
-      return (cards ?? []).map((card: any) => ({
-        ...card,
-        imageUrl: this.buildCardImageUrl(card),
-      }));
-    } catch (error) {
-      console.error('TgcpApi: error en fetchCardsBySet:', error);
-      throw error;
-    }
+    console.log(`TgcpApi: fetching cards for set ${setId}`);
+    // Use set.get() so we get the full set object including its cards array
+    const set = await this.tcg.set.get(setId);
+    const cards = set?.cards ?? [];
+    return cards.map((card: any) => ({
+      ...card,
+      imageUrl: this.buildCardImageUrl(card),
+    }));
   }
 
-  private buildSetLogoUrl(set: any): string {
-    if (!set || typeof set.logo !== 'string' || !set.logo.length) {
-      console.log('TgcpApi buildSetLogoUrl: sin logo', set?.id);
-      return '';
-    }
+private buildSetLogoUrl(set: any): string {
+  const logo = set?.logo;
+  if (typeof logo !== 'string' || !logo) return '';
 
-    return this.buildAssetUrl(set.logo, '.webp');
-  }
+  const hasImageExtension = /\.(webp|png|jpg|jpeg)(\?.*)?$/.test(logo);
+  if (hasImageExtension) return logo;
 
-  private buildCardImageUrl(card: any): string {
-    if (!card || typeof card.image !== 'string' || !card.image.length) {
-      console.log('TgcpApi buildCardImageUrl: sin image', card?.id);
-      return '';
-    }
+  return `${logo}.webp`;
+}
 
-    return this.buildAssetUrl(card.image, 'high.webp');
-  }
-
-  private buildAssetUrl(basePath: string, fileName: string) {
-    return `${basePath}/${fileName}`;
-  }
+private buildCardImageUrl(card: any): string {
+  const image = card?.image;
+  if (typeof image !== 'string' || !image) return '';
+  
+  // Solo saltar si ya tiene extensión de imagen al final
+  const hasImageExtension = /\.(webp|png|jpg|jpeg)(\?.*)?$/.test(image);
+  if (hasImageExtension) return image;
+  
+  return `${image}/high.webp`;
+}
 }
