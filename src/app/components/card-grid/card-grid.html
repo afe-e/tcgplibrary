@@ -1,0 +1,38 @@
+<!-- card-grid.html -->
+@if (isLoading()) {
+  <div class="loading">Cargando...</div>
+} @else if (errorMessage()) {
+  <div class="error">{{ errorMessage() }}</div>
+} @else if (!items().length) {
+  <div class="empty">No hay elementos para mostrar.</div>
+} @else {
+  <div class="cards">
+    @for (item of items(); track item.id) {
+      @if (clickable()) {
+        <button class="card" type="button" (click)="itemClick.emit(item)">
+          <ng-container *ngTemplateOutlet="cardContent; context: { item }"/>
+        </button>
+      } @else {
+        <div class="card">
+          <ng-container *ngTemplateOutlet="cardContent; context: { item }"/>
+        </div>
+      }
+    }
+  </div>
+}
+
+<ng-template #cardContent let-item="item">
+  <div class="card-image">
+    @if (item.imageUrl) {
+      <img [src]="item.imageUrl" [alt]="item.title" loading="lazy">
+    } @else {
+      <div class="no-image">Sin imagen</div>
+    }
+  </div>
+  <div class="card-body">
+    <h3>{{ item.title }}</h3>
+    @if (item.subtitle) {
+      <p>{{ item.subtitle }}</p>
+    }
+  </div>
+</ng-template>
