@@ -1,28 +1,9 @@
-<!-- sets-library.html -->
-@if (isLoading()) {
-  <div class="loading">Cargando expansiones...</div>
-} @else if (errorMessage()) {
-  <div class="error">{{ errorMessage() }}</div>
-} @else if (!items().length) {
-  <div class="empty">No hay expansiones para mostrar.</div>
-} @else {
-  <div class="cards">
-    @for (item of items(); track item.id) {
-      <button class="card" type="button" (click)="setSelected.emit(item)">
-        <div class="card-image">
-          @if (item.imageUrl) {
-            <img [src]="item.imageUrl" [alt]="item.title" loading="lazy">
-          } @else {
-            <div class="no-image">Sin logo</div>
-          }
-        </div>
-        <div class="card-body">
-          <h3>{{ item.title }}</h3>
-          @if (item.subtitle) {
-            <p>{{ item.subtitle }}</p>
-          }
-        </div>
-      </button>
-    }
-  </div>
-}
+<!-- features/expansions/sets-library.html -->
+<!-- Este componente solo orquesta datos. CardGrid se encarga de renderizar. -->
+<app-card-grid
+  [items]="items()"
+  [isLoading]="isLoading()"
+  [errorMessage]="errorMessage()"
+  [clickable]="true"
+  (itemClick)="setSelected.emit($event)"
+/>

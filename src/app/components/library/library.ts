@@ -1,10 +1,15 @@
 // library.ts
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { CardGridItem } from '../card-grid/card-grid';
+import { CardGridItem } from '../../models/card/card-grid-item.model';
 import { CardsLibrary } from '../cards-library/cards-library';
 import { SetsLibrary } from '../sets-library/sets-library';
 
+/**
+ * Componente raíz de la feature.
+ * Gestiona el estado de navegación: qué expansión está seleccionada.
+ * No conoce ni servicios ni lógica de dominio.
+ */
 @Component({
   selector: 'app-library',
   standalone: true,
