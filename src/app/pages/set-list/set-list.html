@@ -1,0 +1,18 @@
+<section class="expansion-grid">
+    @for (expansion of expansions(); track expansion.id) {
+        <a [routerLink]="'set/' + expansion.id" class="expansion">
+            <div class="image">
+                @if (expansion.logoUrl) {
+                    <img [src]="expansion.logoUrl" [alt]="expansion.name" loading="lazy">
+                } @else {
+                    <div class="no-image">Sin imagen</div>
+                }
+            </div>
+            <div class="body">
+                <h3>{{ expansion.name }}</h3>
+            </div>
+        </a>
+    }  @empty {
+    <p>No hay expansiones</p>
+}
+</section>
