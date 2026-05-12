@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+<<<<<<< Updated upstream
 import { RouterOutlet } from '@angular/router';
 
 @Component({

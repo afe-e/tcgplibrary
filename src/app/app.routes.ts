@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+<<<<<<< Updated upstream
 import { CardList } from './card-list/card-list';
 
 export const routes: Routes = [
