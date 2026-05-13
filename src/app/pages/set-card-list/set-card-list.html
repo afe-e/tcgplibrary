@@ -1,6 +1,6 @@
-<section class="expansion-grid">
+<section class="card-grid">
     @for (card of cards(); track card.id) {
-        <div class="expansion">
+        <div class="card">
             <div class="image">
                 @if (card.imageUrl) {
                     <img [src]="card.imageUrl" [alt]="card.name" loading="lazy">
