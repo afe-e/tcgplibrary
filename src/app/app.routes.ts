@@ -1,8 +1,10 @@
 import { Routes } from '@angular/router';
-import { Library } from './components/set-library/library';
+import { SetList } from './pages/set-list/set-list';
+import { SetCardList } from './pages/set-card-list/set-card-list';
 
 export const routes: Routes = [
-    {
-        path: '',
-        component: Library,
-    }];
+    { path: '', component: SetList },
+    { path: 'set/:id', component: SetCardList }
+];
+
+

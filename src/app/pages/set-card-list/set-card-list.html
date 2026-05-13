@@ -1,0 +1,18 @@
+<section class="card-grid">
+    @for (card of cards(); track card.id) {
+        <div class="card">
+            <div class="image">
+                @if (card.imageUrl) {
+                    <img [src]="card.imageUrl" [alt]="card.name" loading="lazy">
+                } @else {
+                    <div class="no-image">Sin imagen</div>
+                }
+            </div>
+            <div class="body">
+                <h3>{{ card.name }}</h3>
+            </div>
+        </div>
+    }  @empty {
+    <p>No hay cartas</p>
+}
+</section>
