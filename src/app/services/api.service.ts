@@ -44,7 +44,7 @@ export class TGCDexService {
   }
 
   private buildExpansionLogoUrl(set: SetResume): string {
-    return set.logo ? `${set.logo}.webp` : 'coche.webp';
+    return set.logo ? `${set.logo}.webp` : `${set.id}_logo.webp`;
   }
 
   buildCardImageUrl(card: CardResume, quality: 'low' | 'high'): string {
