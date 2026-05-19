@@ -1,16 +1,47 @@
 //Nombre
 <input type="text" id="pokeName" [(ngModel)]="nombrePokemon" placeholder="Pincurchin, Gengar..."/>
+<button (click)="busquedaCartas()">Buscar</button>
 //Tipos
 <select [(ngModel)]="tipoSeleccionado">
-  <option value="Grass">Planta</option>
-  <option value="Fire">Fuego</option>
-  <option value="Water">Agua</option>
-  <option value="Lighting">Eléctrico</option>
-  <option value="Psychic">Psíquico</option>
-  <option value="Fight">Lucha</option>
-  <option value="Dark">Siniestro</option>
-  <option value="Metal">Acero</option>
-  <option value="Fairy">Hada</option>
-  <option value="Colorless">Incoloro</option>
-  <option value="Dragon">Dragón</option>
+  <option value="Grass"><img src="Energía_planta.png"/></option>
+  <option value="Fire"><img src="Energía_fuego.png"/></option>
+  <option value="Water"><img src="Energía_agua.png"/></option>
+  <option value="Lighting"><img src="Energía_rayo.png"/></option>
+  <option value="Psychic"><img src="Energía_psíquica.png"/></option>
+  <option value="Fight"><img src="Energía_lucha.png"/></option>
+  <option value="Dark"><img src="Energía_oscura.png"/></option>
+  <option value="Metal"><img src="Energía_metálica.png"/></option>
+  <option value="Fairy"><img src="Energía_hada.png"/></option>
+  <option value="Colorless"><img src="Energía_incolora.png"/></option>
+  <option value="Dragon"><img src="Energía_dragón.png"/></option>
 </select>
+//Variantes
+<select [(ngModel)]="varianteSeleccionada">
+  <option value="normal">Normal</option>
+  <option value="holo">Holo</option>
+  <option value="reverse">Reverse</option>
+  <option value="wPromo">Promo</option>
+  <option value="firstEdition">First Edition</option>
+//Set
+<select [(ngModel)]="setSeleccionado">
+  <option value="A1">Genetic Apex</option>
+  <option value="P-A">Promos-A</option>
+  <option value="A1a">Mythical Island</option>
+  <option value="A2">Space-Time Smackdown</option>
+  <option value="A2a">Triumphant Light</option>
+  <option value="A2b">Shining Revelry</option>
+  <option value="A3">Celestial Guardians</option>
+  <option value="A3a">Extradimensional Crisis</option>
+  <option value="A3b">Eevee Grove</option>
+  <option value="A4">Wisdom of Sea and Sky</option>
+  <option value="A4a">Secluded Springs</option>
+  <option value="B1">Mega Rising</option>
+  <option value="B1a">Crimson Blaze</option>
+  <option value="B2">Fantastical Parade</option>
+  <option value="B2a">Paldean Wonders</option>
+  //Categoría de carta
+  <select [(ngModel)]="categoriaSeleccionada">
+    <option value="pokemon">Pokémon</option>
+    <option value="trainer">Trainer</option>
+    <option value="energy">Energy</option>
+  </select>
