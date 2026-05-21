@@ -7,7 +7,7 @@ import { Card } from '../models/card/card.model';
 export class TCGDexService {
   private static readonly SERIE_ID = 'tcgp';
 
-  private readonly client = new TCGdex();
+  readonly client = new TCGdex();
 
   async getExpansions(): Promise<Expansion[]> {
     const result = [];
@@ -47,7 +47,7 @@ export class TCGDexService {
     return set.logo ? `${set.logo}.webp` : `${set.id}_logo.webp`;
   }
 
-  private buildCardImageUrl(card: CardResume, quality: 'low' | 'high'): string {
+  public buildCardImageUrl(card: CardResume, quality: 'low' | 'high'): string {
     return card.image ? `${card.image}/${quality}.webp` : '';
   }
 }
