@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { TGCDexService } from '../../services/api.service';
+import { TCGDexService } from '../../services/tcgp.service';
 import { Card } from '../../models/card/card.model';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './set-card-list.css',
 })
 export class SetCardList implements OnInit {
-  private readonly tcgService = inject(TGCDexService);
+  private readonly tcgService = inject(TCGDexService);
   private readonly activatedRoute = inject(ActivatedRoute);
 
   readonly cards = signal<Card[]>([]);
