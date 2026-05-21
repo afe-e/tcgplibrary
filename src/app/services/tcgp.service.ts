@@ -4,14 +4,14 @@ import { Expansion } from '../models/card/expansion.model';
 import { Card } from '../models/card/card.model';
 
 @Injectable({ providedIn: 'root' })
-export class TGCDexService {
+export class TCGDexService {
   private static readonly SERIE_ID = 'tcgp';
 
-  private readonly client = new TCGdex();
+  readonly client = new TCGdex();
 
   async getExpansions(): Promise<Expansion[]> {
     const result = [];
-    const series = await this.client.serie.get(TGCDexService.SERIE_ID);
+    const series = await this.client.serie.get(TCGDexService.SERIE_ID);
 
     if (series) {
       for (let set of series.sets) {
@@ -44,10 +44,10 @@ export class TGCDexService {
   }
 
   private buildExpansionLogoUrl(set: SetResume): string {
-    return set.logo ? `${set.logo}.webp` : 'coche.webp';
+    return set.logo ? `${set.logo}.webp` : `${set.id}_logo.webp`;
   }
 
-  buildCardImageUrl(card: CardResume, quality: 'low' | 'high'): string {
+  public buildCardImageUrl(card: CardResume, quality: 'low' | 'high'): string {
     return card.image ? `${card.image}/${quality}.webp` : '';
   }
 }
