@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { TCGDexService } from './tcgp.service';
 import { Card } from '@tcgdex/sdk';
 
@@ -6,11 +6,9 @@ import { Card } from '@tcgdex/sdk';
   providedIn: 'root',
 })
 export class FilterService {
-  constructor(private tcgService: TCGDexService) { }
-  
+  private readonly tcgService = Inject(TCGDexService);
   private static readonly SERIE_ID = 'tcgp';
 
-  // Usamos el tipo Card$1 que nos has compartido
   async getAllCards(): Promise<Card[]> {
     const result: Card[] = [];
     
@@ -50,8 +48,7 @@ export class FilterService {
           }
         }
       }
+      return result;
     }
     
-    return result;
   }
-
