@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,  Output, EventEmitter } from '@angular/core';
 import TCGdex, { Query } from '@tcgdex/sdk';
 import { FormsModule } from '@angular/forms';
 
@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './card-filter.css',
 })
 export class CardFilter {
+  @Output() onBusquedaFinalizada = new EventEmitter<any[]>();
   tipoSeleccionado: string = '';
   nombrePokemon: string = '';
   varianteSeleccionada: string = '';
@@ -26,6 +27,6 @@ export class CardFilter {
         .equal('category', this.categoriaSeleccionada)
 
     );
-    return cartasFiltradas;
+    this.onBusquedaFinalizada.emit(cartasFiltradas);
   }
 }

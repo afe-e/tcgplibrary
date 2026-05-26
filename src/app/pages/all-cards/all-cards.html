@@ -1,3 +1,4 @@
+<app-card-filter (onBusquedaFinalizada)="actualizarCartasFiltradas($any($event))"></app-card-filter>
 <section class="card-grid">
     @for (card of allCards(); track card.id) {
         <div class="card">
@@ -12,7 +13,7 @@
                 <h3>{{ card.name }}</h3>
             </div>
         </div>
-    }  @empty {
-    <p>No hay cartas</p>
-}
+    } @empty {
+        <p>No hay cartas disponibles.</p>
+    }
 </section>
