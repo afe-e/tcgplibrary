@@ -1,0 +1,25 @@
+<app-card-filter (onBusquedaFinalizada)="actualizarCartasFiltradas($any($event))"></app-card-filter>
+<section class="card-grid">
+    @for (card of allCards(); track card.id) {
+        <div class="card" (click)="openCardDetail(card.id)">
+            <div class="image">
+                @if (card.image) {
+                    <img [src]="card.image" [alt]="card.name" loading="lazy">
+                } @else {
+                    <div class="no-image">Sin imagen</div>
+                }
+            </div>
+            <div class="body">
+                <h3>{{ card.name }}</h3>
+            </div>
+        </div>
+    } @empty {
+        <p>No hay cartas disponibles.</p>
+    }
+</section>
+
+<app-card-detail-modal 
+  [cardId]="selectedCardId()" 
+  [isOpen]="isModalOpen()"
+  (closeModal)="closeCardDetail()">
+</app-card-detail-modal>

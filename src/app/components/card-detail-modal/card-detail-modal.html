@@ -1,0 +1,151 @@
+<div *ngIf="isOpen" class="modal-backdrop" (click)="onBackdropClick()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+
+    @if (isLoading()) {
+      <div class="loading">Cargando detalles...</div>
+    } @else if (cardDetails(); as card) {
+      <div class="card-detail">
+        <div class="card-container">
+          <!-- Imagen a la izquierda -->
+          <div class="card-image-section">
+            @if (card.image) {
+              <img [src]="card.image + '/high.webp'" [alt]="card.name">
+            }
+          </div>
+
+          <!-- Información a la derecha -->
+          <div class="card-info-section">
+            <div class="card-header">
+              <h2>{{ card.name }}</h2>
+              @if (card.hp) {
+                <div class="hp">{{ card.hp }} HP</div>
+              }
+            </div>
+          <!-- Información Básica -->
+          <section class="info-section">
+            <h3>Información Básica</h3>
+            <div class="info-grid">
+              @if (card.localId) {
+                <div class="info-item">
+                  <span class="label">ID Local:</span>
+                  <span class="value">{{ card.localId }}</span>
+                </div>
+              }
+              @if (card.types && card.types.length > 0) {
+                <div class="info-item">
+                  <span class="label">Tipos:</span>
+                  <span class="value">
+                    @for (type of card.types; track $index) {
+                      <span class="type-badge">{{ type }}</span>
+                    }
+                  </span>
+                </div>
+              }
+              @if (card.stage) {
+                <div class="info-item">
+                  <span class="label">Fase:</span>
+                  <span class="value">{{ card.stage }}</span>
+                </div>
+              }
+              @if (card.rarity) {
+                <div class="info-item">
+                  <span class="label">Rareza:</span>
+                  <span class="value">{{ card.rarity }}</span>
+                </div>
+              }
+              @if (card.category) {
+                <div class="info-item">
+                  <span class="label">Categoría:</span>
+                  <span class="value">{{ card.category }}</span>
+                </div>
+              }
+              @if (card.illustrator) {
+                <div class="info-item">
+                  <span class="label">Artista:</span>
+                  <span class="value">{{ card.illustrator }}</span>
+                </div>
+              }
+            </div>
+          </section>
+
+          <!-- Ataques -->
+          @if (hasLength(card.attacks)) {
+            <section class="info-section">
+              <h3>Movimientos</h3>
+              @for (attack of card.attacks; track $index) {
+                <div class="attack-card">
+                  <div class="attack-header">
+                    <span class="attack-name">{{ attack.name }}</span>
+                    @if (hasLength(attack.cost)) {
+                      <div class="attack-cost">
+                        @for (cost of attack.cost; track $index) {
+                          <span class="cost-badge">{{ cost }}</span>
+                        }
+                      </div>
+                    }
+                  </div>
+                  @if (attack.damage) {
+                    <div class="attack-damage">Daño: {{ attack.damage }}</div>
+                  }
+                  @if (attack.effect) {
+                    <div class="attack-effect">{{ attack.effect }}</div>
+                  }
+                </div>
+              }
+            </section>
+          }
+
+          <!-- Habilidades -->
+          @if (hasLength(card.abilities)) {
+            <section class="info-section">
+              <h3>Habilidades</h3>
+              @for (ability of card.abilities; track $index) {
+                <div class="ability-card">
+                  <span class="ability-name">{{ ability.name }}</span>
+                  <p class="ability-effect">{{ ability.effect }}</p>
+                </div>
+              }
+            </section>
+          }
+
+          <!-- Debilidades y Resistencias -->
+          <section class="info-section">
+            @if (hasLength(card.weaknesses)) {
+              <div class="weaknesses">
+                <h3>Debilidades</h3>
+                @for (weakness of card.weaknesses; track $index) {
+                  <div class="weakness-item">
+                    <span class="type">{{ weakness.type }}</span>
+                    <span class="modifier">{{ weakness.value }}</span>
+                  </div>
+                }
+              </div>
+            }
+            @if (hasLength(card.resistances)) {
+              <div class="resistances">
+                <h3>Resistencias</h3>
+                @for (resistance of card.resistances; track $index) {
+                  <div class="resistance-item">
+                    <span class="type">{{ resistance.type }}</span>
+                    <span class="modifier">{{ resistance.value }}</span>
+                  </div>
+                }
+              </div>
+            }
+          </section>
+
+          <!-- Retroceso -->
+          @if (card.retreat !== null && card.retreat !== undefined) {
+            <section class="info-section">
+              <h3>Costo de Retroceso</h3>
+              <div class="retreat-cost">
+                <span class="cost-badge">{{ card.retreat }}</span>
+              </div>
+            </section>
+          }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
