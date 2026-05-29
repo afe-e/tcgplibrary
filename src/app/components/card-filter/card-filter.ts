@@ -21,11 +21,11 @@ export class CardFilter {
     const cartasFiltradas = await client.card.list(
       Query.create()
         .contains('name', this.nombrePokemon)
-        .equal('types', this.tipoSeleccionado)
+        /*.equal('types', this.tipoSeleccionado)
         .equal('variants', this.varianteSeleccionada)
         .equal('set.id', this.setSeleccionado)
         .equal('category', this.categoriaSeleccionada)
-
+*/
     );
     this.onBusquedaFinalizada.emit(cartasFiltradas);
   }
