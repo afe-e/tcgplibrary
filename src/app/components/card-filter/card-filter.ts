@@ -18,14 +18,15 @@ export class CardFilter {
 
   async busquedaCartas() {
     const client = new TCGdex('en');
+    const series = await client.fetch('series', 'tcgp');
     const cartasFiltradas = await client.card.list(
       Query.create()
-        .contains('name', this.nombrePokemon)
-        .equal('types', this.tipoSeleccionado)
-        .equal('variants', this.varianteSeleccionada)
-        .equal('set.id', this.setSeleccionado)
-        .equal('category', this.categoriaSeleccionada)
-
+        .contains('name', this.nombrePokemon || '')
+        //.includes('types', this.tipoSeleccionado)
+        //.equal('variants', this.varianteSeleccionada)
+        .includes('set.id', this.setSeleccionado || '')
+        //.equal('category', this.categoriaSeleccionada)
+        .sort('localId', 'DESC') 
     );
     this.onBusquedaFinalizada.emit(cartasFiltradas);
   }

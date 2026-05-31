@@ -1,7 +1,7 @@
-//Nombre
+Nombre
 <input type="text" id="pokeName" [(ngModel)]="nombrePokemon" placeholder="Pincurchin, Gengar..."/>
 <button (click)="busquedaCartas()">Buscar</button>
-//Tipos
+Tipos
 <select [(ngModel)]="tipoSeleccionado">
   <option value="grass"><img src="grassEnergy.png"/></option>
   <option value="fire"><img src="fireEnergy.png"/></option>
@@ -15,14 +15,15 @@
   <option value="colorless"><img src="colorlessEnergy.png"/></option>
   <option value="dragon"><img src="dragonEnergy.png"/></option>
 </select>
-//Variantes
+Variantes
 <select [(ngModel)]="varianteSeleccionada">
   <option value="normal">Normal</option>
   <option value="holo">Holo</option>
   <option value="reverse">Reverse</option>
   <option value="wPromo">Promo</option>
   <option value="firstEdition">First Edition</option>
-//Set
+  </select>
+Set
 <select [(ngModel)]="setSeleccionado">
   <option value="A1">Genetic Apex</option>
   <option value="P-A">Promos-A</option>
@@ -39,7 +40,8 @@
   <option value="B1a">Crimson Blaze</option>
   <option value="B2">Fantastical Parade</option>
   <option value="B2a">Paldean Wonders</option>
-  //Categoría de carta
+  </select>
+  Categoría de carta
   <select [(ngModel)]="categoriaSeleccionada">
     <option value="pokemon">Pokémon</option>
     <option value="trainer">Trainer</option>
